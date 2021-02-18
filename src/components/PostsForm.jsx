@@ -1,10 +1,11 @@
 import React from "react";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {createPost} from "../redux/actions";
 
 
-function PostForm({createPost}) {
+function PostForm() {
     const [inputValue, setInputValue] = React.useState('')
+    const dispacth = useDispatch()
 
     function submitHandler(e) {
         e.preventDefault()
@@ -12,7 +13,7 @@ function PostForm({createPost}) {
             title: inputValue,
             id: Date.now().toString()
         }
-        createPost(newPost)
+        dispacth(createPost(newPost))
         setInputValue('')
     }
 
@@ -32,8 +33,4 @@ function PostForm({createPost}) {
     )
 }
 
-const mapDispatchToProps = {
-    createPost: createPost
-}
-
-export default connect(null, mapDispatchToProps)(PostForm)
+export default PostForm

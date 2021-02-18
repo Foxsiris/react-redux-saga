@@ -1,9 +1,10 @@
 import React from "react";
 import Post from "./Post";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 
 
-const Posts = ({syncPosts}) => {
+const Posts = () => {
+    const syncPosts = useSelector(state => state.posts.posts)
     if (!syncPosts.length) {
         return (
             <div className="card">
@@ -21,10 +22,4 @@ const Posts = ({syncPosts}) => {
         </div>
     )
 }
-
-const mapStateToProps = state => {
-    return {
-        syncPosts:state.posts.posts
-    }
-}
-export default connect(mapStateToProps)(Posts)
+export default Posts
